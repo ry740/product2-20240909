@@ -1,14 +1,12 @@
+<!-- templates/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat with GPT-3.5</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .chat-container { width: 50%; margin: 0 auto; padding-top: 20px; }
-        .message { margin: 10px 0; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="chat-container">
@@ -18,27 +16,6 @@
         <button onclick="sendMessage()">Send</button>
     </div>
 
-    <script>
-        function sendMessage() {
-            const userInput = document.getElementById('user-input').value;
-            const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<div class="message"><strong>You:</strong> ${userInput}</div>`;
-            fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userInput }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                chatBox.innerHTML += `<div class="message"><strong>GPT-3.5:</strong> ${data.response}</div>`;
-                document.getElementById('user-input').value = '';
-            })
-            .catch(error => {
-                chatBox.innerHTML += `<div class="message"><strong>Error:</strong> ${error}</div>`;
-            });
-        }
-    </script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
