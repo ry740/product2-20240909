@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>履歴</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <h1>チャット履歴</h1>
+
+    <div id="history-list">
+        <!-- Python側で過去の履歴をここに表示 -->
+        {% for history in histories %}
+            <div class="history-item">
+                <strong>メッセージ:</strong> {{ history.message }} <br>
+                <strong>レスポンス:</strong> {{ history.response }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <a href="/" class="button">トップページに戻る</a>
+    </div>
+</body>
+</html>

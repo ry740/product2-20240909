@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日のごはん</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <h1>今日のごはん</h1>
+    
+    <!-- チャット入力フォーム -->
+    <form action="/search.html" class="search-wrapper cf">
+        <input type="text" id="user-input" placeholder="入力してください" required="">
+        <button type="button" onclick="sendMessage()">送信</button>
+    </form>
+
+    <!-- チャット表示エリア -->
+    <div id="chat-box" class="chat-box"></div>
+
+    <!-- トップページに戻るリンクを追加 -->
+    <div class="container">
+        <a href="/" class="button">トップページに戻る</a>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div class="message"><strong>You:</strong> ${userInput}</div>`;
+            
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatBox.innerHTML += `<div class="message"><strong>GPT-3.5:</strong> ${data.response}</div>`;
+                document.getElementById('user-input').value = '';
+            })
+            .catch(error => {
+                chatBox.innerHTML += `<div class="message"><strong>Error:</strong> ${error}</div>`;
+            });
+        }
+    </script>
+</body>
+</html>
