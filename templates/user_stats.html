@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイステータス</title>
+    <style>
+        body {
+            background-color: #f9f5d7; /* 背景色 */
+            font-family: 'M PLUS 1p', sans-serif;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #666633;
+        }
+        .stats {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f9f5d7;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>マイステータス</h1>
+        <img src="{{ user.icon }}" alt="アイコン" style="width:100px; height:100px; border-radius:50%;">
+        <p class="stats">現在のレベル: {{ user.level }}</p>
+        <p class="stats">現在の経験値: {{ user.experience }}/100</p>
+
+        <!-- カロリー入力フォーム -->
+        <h2>摂取カロリー管理</h2>
+        <form action="/calories" method="POST">
+            <label for="date">日付:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="calories">摂取カロリー:</label>
+            <input type="number" id="calories" name="calories" required>
+            
+            <button type="submit">登録</button>
+        </form>
+
+        <!-- 過去のカロリー記録 -->
+        <h3>過去の記録</h3>
+        <table>
+            <tr>
+                <th>日付</th>
+                <th>摂取カロリー</th>
+            </tr>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry.date }}</td>
+                <td>{{ entry.calories }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/">トップページに戻る</a>
+    </div>
+</body>
+</html>

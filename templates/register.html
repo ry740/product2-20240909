@@ -3,20 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ユーザー登録</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
+    <title>登録ページ</title>
+    <style>
+        body {
+            background-color: #f9f5d7; /* 背景色 */
+            font-family: 'M PLUS 1p', sans-serif; /* Google Fontsを使用 */
+            color: #333; /* テキストの基本色 */
+            padding: 20px; /* 余白設定 */
+        }
 
+        h2 {
+            text-align: center;
+            color: #666633;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 0 auto; /* 中央揃え */
+            padding: 20px;
+            background-color: #fff; /* フォームの背景色 */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 影の追加 */
+            border-radius: 8px; /* 角の丸み */
+        }
+
+        label {
+            display: block; /* ラベルをブロック要素に */
+            margin-bottom: 10px; /* 余白の追加 */
+            color: #666; /* ラベル色 */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px); /* 全幅からpaddingとborderを引く */
+            padding: 10px; /* パディング */
+            margin-bottom: 20px; /* 下余白 */
+            border-radius: 4px; /* 入力欄の角の丸み */
+            border: 1px solid #ccc; /* 枠線 */
+        }
+
+        button {
+            width: 100%; /* ボタンを全幅に */
+            padding: 10px; /* パディング */
+            background-color: #4CAF50; /* ボタン色 */
+            color: white; /* テキスト色 */
+            border: none; /* 枠線なし */
+            border-radius: 4px; /* 角の丸み */
+            cursor: pointer; /* カーソルを指に */
+        }
+
+        button:hover {
+            background-color: #45a049; /* ホバー時の色変更 */
+        }
+
+        a {
+            color: #666633; /* リンク色 */
+            text-decoration: none; /* 下線を消す */
+        }
+
+        a:hover {
+            text-decoration: underline; /* ホバーで下線を追加 */
+        }
+    </style>
+</head>
 <body>
-    <h1>ユーザー登録</h1>
-    <form action="/register" method="post">
-        <input type="text" name="username" placeholder="ユーザー名" required="">
-        <input type="password" name="password" placeholder="パスワード" required="">
+    <h2>登録</h2>
+    <form action="/register" method="POST">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
         <button type="submit">登録</button>
     </form>
-
-    <div class="container">
-        <a href="/" class="button">トップページに戻る</a>
-    </div>
+    <p>既にアカウントをお持ちですか？ <a href="/login">こちらからログイン</a>.</p>
 </body>
 </html>

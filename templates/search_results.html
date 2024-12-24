@@ -4,7 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>検索結果</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background-color: #f9f5d7; /* 背景色 */
+            font-family: 'M PLUS 1p', sans-serif; /* Google Fontsを使用 */
+            color: #333; /* テキストの基本色 */
+            padding: 20px; /* 余白設定 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #666633;
+        }
+
+        .video-item {
+            display: flex;
+            background-color: #fff; /* 背景色 */
+            padding: 20px;
+            margin-bottom: 20px; /* リストアイテム間の余白 */
+            border-radius: 8px; /* 角の丸み */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 影の追加 */
+        }
+
+        .video-thumbnail {
+            margin-right: 20px;
+        }
+
+        .video-thumbnail img {
+            border-radius: 8px; /* サムネイル画像の角の丸み */
+            width: 120px; /* サムネイルの幅 */
+            height: auto; /* アスペクト比を維持 */
+        }
+
+        .video-details h3 {
+            color: #333; /* タイトルの色 */
+            margin-bottom: 10px;
+        }
+
+        .video-details p {
+            color: #666; /* 説明文の色 */
+        }
+
+        a {
+            color: #4CAF50; /* リンクの色 */
+            text-decoration: none; /* 下線を消す */
+        }
+
+        a:hover {
+            text-decoration: underline; /* ホバーで下線を表示 */
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,9 +82,16 @@
         {% if videos %}
             {% for video in videos %}
                 <div class="video-item">
-                    <h3>{{ video.snippet.title }}</h3>
-                    <p>{{ video.snippet.description }}</p>
-                    <a href="https://www.youtube.com/watch?v={{ video.id.videoId }}" target="_blank">動画を見る</a>
+                    <div class="video-thumbnail">
+                        <a href="https://www.youtube.com/watch?v={{ video.id.videoId }}" target="_blank">
+                            <img src="{{ video.snippet.thumbnails.default.url }}" alt="{{ video.snippet.title }}のサムネイル">
+                        </a>
+                    </div>
+                    <div class="video-details">
+                        <h3>{{ video.snippet.title }}</h3>
+                        <p>{{ video.snippet.description }}</p>
+                        <a href="https://www.youtube.com/watch?v={{ video.id.videoId }}" target="_blank">動画を見る</a>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
